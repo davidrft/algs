@@ -24,6 +24,8 @@
       - [Common](#common)
       - [Leftmost](#leftmost)
       - [Rightmost](#rightmost)
+  - [Graphs](#graphs)
+      - [Union-Find](#union-find)
   - [Heaps](#heaps)
   - [Dynamic Programming](#dynamic-programming)
   - [Greedy Algorithms](#greedy-algorithms)
@@ -251,7 +253,30 @@ def binarySearch(nums, target):
             return -1
         return l - 1
 ```
+## Graphs
+#### Union-Find
 
+```python
+    class UnionFind:
+        def __init__(self, nodes):
+            self.group = [node for node in nodes]
+
+        def find(self, node) -> int:
+            while node != self.group[node]:
+                # Path Compression
+                group_node = self.group[node]
+                self.group[node] = self.group[group_node]
+                node = group_node
+            return node
+
+        def same_set(self, node_a, node_b) -> bool:
+            return self.find(node_a) == self.find(node_b)
+
+        def unite(self, node_a, node_b) -> None:
+            group_a = self.find(node_a)
+            group_b = self.find(node_b)
+            self.group[group_a] = group_b
+```
 
 ## Heaps
 ```python
